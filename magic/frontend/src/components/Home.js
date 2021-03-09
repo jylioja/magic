@@ -18,6 +18,7 @@ const Home = () => {
     return(
         <div>
             <a href="/login">Login</a>
+            <a href="/register">Register</a>
             <form onSubmit={e => submitHandler(e)}>
                 <button type="submit">Console log users</button>
             </form>

@@ -10,4 +10,9 @@ const getUsers = () => {
     });
 }
 
-export default { getUsers }
+const addUser = async user => {
+    const request = await axios.post(baseUrl, user);
+    return request;
+}
+
+export default { getUsers, addUser }
