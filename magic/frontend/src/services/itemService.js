@@ -1,9 +1,12 @@
 import axios from 'axios';
 
-const baseUrl = '/items';
+const baseUrl = '/items/paginated';
 
-const getItems = (pageNumber) => {
-    const request = axios.get(baseUrl, page);
+const getItems = (page) => {
+    const params = {
+        page: page
+    };
+    const request = axios.get(`${baseUrl}/${params.page}`);
     return request
     .then(response => {
         return response.data

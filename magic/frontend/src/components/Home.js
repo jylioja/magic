@@ -10,12 +10,13 @@ const Home = () => {
     const [users, setUsers] = useState([]);
     const [items, setItems] = useState([]);
 
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
-    const getItems = (page) => {
-        itemService.getItems()
+    const getItems = () => {
+        itemService.getItems(page)
         .then((items) => {
             setItems(items);
+            console.log(items);
         })
         .catch((err) => {
             console.log(err);
@@ -36,12 +37,12 @@ const Home = () => {
     }
 
     const previousPage = () => {
-        if(page > 0){
+        if(page > 1){
             setPage(page - 1)
         }
     }
 
-    useEffect(getItems, []);
+    useEffect(getItems, [page]);
 
     return(
         <div>

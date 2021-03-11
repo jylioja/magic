@@ -33,13 +33,23 @@ router
           password: passwordHash,
           role: 'user'
         }
-        knex('users').insert(user)
-        .then(() => {
-          res.status(201).json(
-            { message: "Added user" }
-          );
-        })
-        .catch((err) => {
+
+      knex('users')
+      .count('username')
+      .where('username', '=', user.username)
+      .then((rows) => {
+        if(rows[0].count > 0){
+          res.status(409)
+          .json({ error: 'already exists' });
+        }else{
+          knex('users').insert(user)
+          .then(() => {
+            res.status(201).json({ message: "Added user" });
+            });
+          }
+        }
+      )
+      .catch((err) => {
         console.log(err);
         res.status(500).json(
           { error: 'database error' }

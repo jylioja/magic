@@ -11,8 +11,8 @@ const getUsers = () => {
 }
 
 const addUser = async user => {
-    const request = await axios.post(baseUrl, user);
-    return request;
+    const res = await axios.post(baseUrl, user);
+    return res;
 }
 
 export default { getUsers, addUser }
