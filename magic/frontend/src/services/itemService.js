@@ -1,16 +1,17 @@
 import axios from 'axios';
 
-const baseUrl = '/items/paginated';
+const baseUrl = '/items/';
 
-const getItems = (page) => {
+const getPaginatedItems = (page, set) => {
     const params = {
-        page: page
+        page: page,
+        set: set
     };
-    const request = axios.get(`${baseUrl}/${params.page}`);
+    const request = axios.get(`${baseUrl}/paginated/${params.set}/${params.page}`);
     return request
     .then(response => {
         return response.data
     });
 }
 
-export default { getItems }
+export default { getPaginatedItems }

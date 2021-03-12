@@ -9,18 +9,24 @@ const options = config.DATABASE_OPTIONS;
 const knex = require('knex')(options);
 
 router
-.route("/paginated/:page")
+.route("/paginated/:set/:page")
 .get((req, res) => {
     const page = req.params.page;
-    console.log(page, 'asdasdasd');
+    const set = req.params.set;
 
-    knex.from('ncards').select('*').orderBy('ncolor').paginate({
-        perPage: 20,
+    knex.from('ncards').select('*').where('nset', '=', set).orderBy('ncolor').paginate({
+        perPage: 10,
         currentPage: page
     }).then((rows) => {
-        console.log(rows);
+        console.log(rows.pagination);
         const newRows = rows.data.map(card => ({...card, imageurl: `https://bucket-of-magic.s3.eu-north-1.amazonaws.com/KHM/${card.nname.replace(/\s/g, '+')}.full.jpg`}));
-        res.send(newRows);
+        res.json(newRows);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json(
+            { error: 'database error' }
+        );
     })
 });
 

@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import userService from '../services/userService';
 import itemService from '../services/itemService';
 import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
 
 
 const Home = () => {
 
     const [users, setUsers] = useState([]);
     const [items, setItems] = useState([]);
+    const [selectedSet, setSelectedSet] = useState('KHM')
 
     const [page, setPage] = useState(1);
 
     const getItems = () => {
-        itemService.getItems(page)
+        itemService.getPaginatedItems(page, selectedSet)
         .then((items) => {
             setItems(items);
             console.log(items);
@@ -45,19 +45,14 @@ const Home = () => {
     useEffect(getItems, [page]);
 
     return(
-        <div>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-            <div className="d-flex">
+        <div className="container">
+            <div className="container d-flex justify-content-center">
+            {items.map(card => (<img className="cardImg" src={card.imageurl}/>))}
+            </div>
+            <div className="d-flex justify-content-center">
             <Button onClick={() => previousPage()}>Previous</Button>
             <div>{page}</div>
             <Button onClick={() => nextPage()}>Next</Button>
-            </div>
-            <form onSubmit={e => submitHandler(e)}>
-                <button type="submit">Console log users</button>
-            </form>
-            <div>
-            {items.map(card => (<img src={card.imageurl}/>))}
             </div>
         </div>
     );
