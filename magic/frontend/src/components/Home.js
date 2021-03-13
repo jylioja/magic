@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import userService from '../services/userService';
 import itemService from '../services/itemService';
 import Button from 'react-bootstrap/Button';
+import Card from './Card'
 
 
 const Home = () => {
 
-    const [users, setUsers] = useState([]);
     const [items, setItems] = useState([]);
     const [selectedSet, setSelectedSet] = useState('KHM')
+    const [showCardInfo, setShowCardInfo] = useState(false);
 
     const [page, setPage] = useState(1);
 
@@ -22,15 +23,6 @@ const Home = () => {
             console.log(err);
         })
     }
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        userService.getUsers()
-        .then((res) => {
-            setUsers(res);
-            console.log(res);
-        });
-    } 
 
     const nextPage = () => {
         setPage(page + 1);
@@ -46,13 +38,15 @@ const Home = () => {
 
     return(
         <div className="container">
-            <div className="container d-flex justify-content-center">
-            {items.map(card => (<img className="cardImg" src={card.imageurl}/>))}
-            </div>
-            <div className="d-flex justify-content-center">
-            <Button onClick={() => previousPage()}>Previous</Button>
-            <div>{page}</div>
-            <Button onClick={() => nextPage()}>Next</Button>
+            {items.length === 0 ?
+            <div className="lds-dual-ring"></div>:
+            <div className="card-container row justify-content-between">
+            {items.map(card => (<Card card={card}/>))}
+            </div> }
+            <div className="d-flex justify-content-between mt-3">
+                    <Button onClick={() => previousPage()}>Previous</Button>
+                    <span className="">{page}</span>
+                    <Button onClick={() => nextPage()}>Next</Button>
             </div>
         </div>
     );

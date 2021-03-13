@@ -15,7 +15,7 @@ router
     const set = req.params.set;
 
     knex.from('ncards').select('*').where('nset', '=', set).orderBy('ncolor').paginate({
-        perPage: 10,
+        perPage: 20,
         currentPage: page
     }).then((rows) => {
         console.log(rows.pagination);

@@ -39,8 +39,9 @@ router
       .where('username', '=', user.username)
       .then((rows) => {
         if(rows[0].count > 0){
-          res.status(409)
-          .json({ error: 'already exists' });
+          return res.status(409).json(
+            { error: 'already exists' }
+          );
         }else{
           knex('users').insert(user)
           .then(() => {

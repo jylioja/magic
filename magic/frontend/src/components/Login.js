@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import loginService from '../services/loginService';
+import { useHistory } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -15,6 +16,10 @@ const [newLogin, setNewLogin] = useState(
     }
 );
 
+const [error, setError] = useState('');
+
+const history = useHistory();
+
 const setLoginField = (fieldname, value) => {
     const tempLogin = {...newLogin};
     tempLogin[fieldname] = value;
@@ -25,11 +30,16 @@ const submitHandler = (e) => {
     e.preventDefault();
      loginService.login(newLogin)
         .then((loginData) => {
-            const user = loginData.role;
              window.localStorage.setItem(
                  'loggedUser', JSON.stringify(loginData)
              );
             console.log('Token', loginData.token);
+            history.push("/")
+            window.location.reload(false);
+         })
+         .catch((err) => {
+             setError(err.response.data.error);
+             console.log(error);
          })
 }
 
@@ -51,6 +61,7 @@ const logOut = () => {
                         <Form.Control type="password" placeholder="Password" onChange={e => setLoginField("password", e.target.value)}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">Log in</Button>
+                    <div className="error">{error}</div>
                 </Col>
             </Form>}
         </div>

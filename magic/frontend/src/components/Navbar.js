@@ -11,23 +11,32 @@ import {
 
 
 const Navbar = () => {
+
+const loggedIn = JSON.parse(window.localStorage.getItem('loggedUser'));
+
+const logOut = () => {
+  window.localStorage.removeItem('loggedUser');
+  window.location.reload(false);
+}
+
     return (
         <Router>
-        <nav class="navbar navbar-expand-lg bg-dark navbar-fixed-top">
-        <Link to="/" class="navbar-brand" href="/">MTG</Link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <Link to="/login" class="nav-link">Login</Link>
+        <nav className="navbar navbar-expand-lg bg-dark navbar-fixed-top">
+        <Link to="/" className="navbar-brand" href="/">MTG</Link>
+        {loggedIn ?  
+        <ul className="navbar-nav">
+          <li className="nav-item active">
+              <Link className="nav-link" onClick={() => logOut()}>Logout</Link>
+          </li>
+        </ul> :
+        <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link to="/login" className="nav-link">Login</Link>
             </li>
-            <li class="nav-item">
-              <Link to="/register" class="nav-link">Register</Link>
+            <li className="nav-item">
+              <Link to="/register" className="nav-link">Register</Link>
             </li>
-          </ul>
-        </div>
+          </ul>}
       </nav>
       <Switch>
         <Route exact path="/">
