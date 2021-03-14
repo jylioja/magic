@@ -42,14 +42,14 @@ router
 
                  const userForToken = {
                      username: tempUser,
-                     userID: tempUser.userID,
+                     userId: tempUser.id,
                      userRole: tempUser.role
                  }
 
                  const token = jwt.sign(userForToken, config.SECRET)
                  res 
                  .status(200)
-                 .send({token, username: tempUser.username, userRole: tempUser.role})
+                 .send({token, userId: tempUser.id, username: tempUser.username, userRole: tempUser.role})
              });
      })
      .catch((err) => {

@@ -77,8 +77,6 @@ html{
 
 .card-info{
   background-color: rgba(0, 0, 0, 0.521);
-  width: 100vw;
-  height: 100vw;
   position: fixed;
   left: 0;
   top: 0;
@@ -87,17 +85,21 @@ html{
   text-align: center;
 }
 
-.info-text{
-  background-color: rgb(17, 17, 17);
-  color: white;
-  width: 20%;
-  height: 20%;
+.card-info-text{
   border: 1px solid black;
   box-shadow: 5px 10px 8px #696969;
   border-radius: 20px;
-  margin: auto;
   margin-top: 20rem;
+  margin-left: 50rem;
+  margin-right: 50rem;
   padding: 3em;
+}
+
+.close-button{
+  z-index: 104;
+  position: absolute;
+  right: 0 !important;
+  top: 0 !important;
 }
 
 .error {

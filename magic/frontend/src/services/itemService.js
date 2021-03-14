@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = '/items/';
+const baseUrl = '/items';
 
 const getPaginatedItems = (page, set) => {
     const params = {

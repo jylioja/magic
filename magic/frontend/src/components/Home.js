@@ -9,7 +9,6 @@ const Home = () => {
 
     const [items, setItems] = useState([]);
     const [selectedSet, setSelectedSet] = useState('KHM')
-    const [showCardInfo, setShowCardInfo] = useState(false);
 
     const [page, setPage] = useState(1);
 
