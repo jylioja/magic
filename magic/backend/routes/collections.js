@@ -14,31 +14,34 @@ router
     const body = req.body;
 
     knex('collections')
-    .count('user_id')
-    .where('user_id', '=', body.userId)
+    .select('*')
+    .where('user_id', '=', body.user_id)
+    .andWhere('item_id', '=', body.item_id)
     .then((rows) => {
-        if(rows[0].count > 0){
-            knex('collections').insert(body.cardId).where('user_id', '=', body.userId)
+        if(rows.length > 0){
+            knex('collections')
+            .where('user_id', '=', body.user_id)
+            .andWhere('item_id', '=', body.item_id)
+            .increment('quantity', 1)
             .then(() => {
-                res.status(201).json({ message: "card added to collection" });
+                res.status(201).json({ message: 'Incremented quantity of card' });
             })
             .catch((err) => {
-                res.status(500).json({ error: 'database error' })
+                console.log(err);
+                res.status(500).json({ error: 'database error' });
             })
-        }else{
-            const newCollection = {
-                user_Id: body.userId,
-                cards_ids: body.cardId,
-            };
-            knex('collections').insert(newCollection)
+        } else {
+            knex('collections')
+            .insert({user_id: body.user_id, item_id: body.item_id, quantity: 1})
             .then(() => {
-                res.status(201).json({ message: 'New collection added' });
+                res.status(201).json({ message: 'New card added' });
             })
             .catch((err) => {
+                console.log(err);
                 res.status(500).json({ error: 'database error' })
-            })
+            });
         }
-    })
+    });
 })
 
 module.exports = router;

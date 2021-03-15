@@ -14,7 +14,7 @@ const addToCollection = (cardId) => {
         console.log('Card added');
     })
     .catch((err) => {
-        console.log(err.response.data.error);
+        console.log(err);
     })
 }
 

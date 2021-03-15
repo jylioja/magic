@@ -4,11 +4,10 @@ const config = require('../utils/config');
 
 const getTokenFrom = request => {
     const authorization = request.get('authorization');
-    console.log(authorization);
     if(authorization && authorization.toLowerCase().startsWith('bearer ')){
         return authorization.substring(7);
     }
-    return null
+    return null;
 }
 
 const isAuthenticated = (request, response, next) => {
@@ -18,19 +17,19 @@ const isAuthenticated = (request, response, next) => {
         return response.status(401).json(
             { error: 'token missing' }
         );
+    }
 
     const decodedToken = jwt.verify(token, config.SECRET);
-    console.log('Decoded token:', decodedToken);
+    //console.log('Decoded token:', decodedToken);
 
-    if(!decodedToken || !decodedToken.id){
-        return response.status(401).json(
+    if(!decodedToken || !decodedToken.userId){
+         return response.status(401).json(
             { error: 'token invalid' }
         );
     }
 
-    response.locals.auth = { id: decodedToken.id, role: decodedToken.role }
+    response.locals.auth = { id: decodedToken.userId, role: decodedToken.role }
     next();
-    }
 }
 
 const isAdmin = (request, response, next) => {

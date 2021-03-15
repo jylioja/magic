@@ -14,7 +14,12 @@ const addToCollection = async (cardId, userId) => {
         headers: {Authorization: token}
     };
 
-    const res = await axios.post(`${baseUrl}/${userId}`, cardId, config);
+    const body = {
+        user_id: userId,
+        item_id: cardId
+    }
+
+    const res = await axios.post(baseUrl, body, config);
     return res;
 }
 
