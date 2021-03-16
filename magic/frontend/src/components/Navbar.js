@@ -3,16 +3,18 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
   } from "react-router-dom";
   import Home from './Home'
   import Login from './Login'
   import Register from './Register'
+  import Collection from './Collection';
 
 
 const Navbar = () => {
 
 const loggedIn = JSON.parse(window.localStorage.getItem('loggedUser'));
+
 
 const logOut = () => {
   window.localStorage.removeItem('loggedUser');
@@ -25,6 +27,9 @@ const logOut = () => {
         <Link to="/" className="navbar-brand" href="/">MTG</Link>
         {loggedIn ?  
         <ul className="navbar-nav">
+          <li className="nav-item active">
+            <Link to="/collection" className="nav-link">My Collection</Link>
+          </li>
           <li className="nav-item active">
               <Link className="nav-link" onClick={() => logOut()}>Logout</Link>
           </li>
@@ -45,6 +50,9 @@ const logOut = () => {
         <Route exact path="/login">
             <Login />
         </Route> 
+        <Route exact path="/collection">
+          <Collection />
+        </Route>
         <Route exact path="/register">
             <Register />
         </Route>
