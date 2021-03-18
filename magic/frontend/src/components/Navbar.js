@@ -17,8 +17,8 @@ const loggedIn = JSON.parse(window.localStorage.getItem('loggedUser'));
 
 
 const logOut = () => {
-  window.localStorage.removeItem('loggedUser');
-  window.location.reload(false);
+  window.localStorage.clear();
+  window.location.href = '/';
 }
 
     return (

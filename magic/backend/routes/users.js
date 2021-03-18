@@ -10,7 +10,9 @@ const knex = require('knex')(options);
 router
   .route("/")
   .get((req, res) => {
-    knex.from('users').select("*").then((rows) => {
+    knex.from('users')
+    .select("*")
+    .then((rows) => {
       console.log(rows);
       res.json(rows)
     })

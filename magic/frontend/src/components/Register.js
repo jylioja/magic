@@ -11,7 +11,8 @@ const [newUser, setNewUser] = useState(
     {
         username: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     }
 );
 
@@ -26,9 +27,11 @@ const setUserField = (fieldname, value) => {
 
 const submitHandler = (e) => {
     e.preventDefault();
+    const passwordCorrect = newUser.password.localeCompare(newUser.confirmPassword);
     newUser.username.length === 0 ? setError('no username') :
     newUser.email.length === 0 ? setError('no email') :
-    newUser.password.length === 0 ? setError('no password') 
+    newUser.password.length === 0 ? setError('no password') :
+    passwordCorrect !== 0 ? setError('passwords doesnt match')
     : userService.addUser(newUser)
         .then(() => {
             console.log('User added');
@@ -59,6 +62,10 @@ const submitHandler = (e) => {
                     <Form.Group>
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" onChange={e => setUserField("password", e.target.value)}/>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" onChange={e => setUserField("confirmPassword", e.target.value)}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">Log in</Button>
                     <div className="error">{error}</div>

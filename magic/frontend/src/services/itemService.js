@@ -14,16 +14,4 @@ const getPaginatedItems = (page, set) => {
     });
 }
 
-const getPaginatedCollection = (page, set, userId) => {
-    const params = {
-        page: page,
-        set: set,
-        user_id: userId
-    };
-    const request = axios.get(`${baseUrl}/paginated/${params.set}/${params.page}/${params.user_id}`);
-    return request
-    .then(response => {
-        return response.data
-    });
-}
-export default { getPaginatedItems, getPaginatedCollection }
+export default { getPaginatedItems }

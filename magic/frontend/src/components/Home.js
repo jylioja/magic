@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import userService from '../services/userService';
 import itemService from '../services/itemService';
 import Button from 'react-bootstrap/Button';
-import Card from './Card'
+import Card from './Card';
+import Sets from './Sets';
 
 
 const Home = () => {
@@ -37,6 +38,7 @@ const Home = () => {
 
     return(
         <div className="container">
+            <Sets />
             {items.length === 0 ?
             <div className="lds-dual-ring"></div>:
             <div className="card-container row justify-content-between">
