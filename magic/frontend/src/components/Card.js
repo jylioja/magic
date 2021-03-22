@@ -10,7 +10,7 @@ const Card = ({card}) => {
     return(
     <div>
         <div className="col card-content" onClick={() => setShowInfo(!showInfo)}>
-            <img className="cardImg rounded " src={card.imageurl}></img>
+            <img className="cardImg rounded" src={card.imageurl}></img>
         </div>
         {showInfo &&
             <div>

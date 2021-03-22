@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import userService from '../services/userService';
 import itemService from '../services/itemService';
 import Button from 'react-bootstrap/Button';
 import Card from './Card';
@@ -16,8 +15,9 @@ const Home = () => {
     const getItems = () => {
         itemService.getPaginatedItems(page, selectedSet)
         .then((items) => {
-            setItems(items);
-            console.log(items);
+            const newItems = items.data.map(card => ({...card, imageurl: `https://bucket-of-magic.s3.eu-north-1.amazonaws.com/${selectedSet}/${card.nname.replace(/\s/g, '+')}.full.jpg`}));
+            setItems(newItems);
+            console.log(newItems);
         })
         .catch((err) => {
             console.log(err);
@@ -34,11 +34,11 @@ const Home = () => {
         }
     }
 
-    useEffect(getItems, [page]);
+    useEffect(getItems, [page, selectedSet]);
 
     return(
         <div className="container">
-            <Sets />
+            <Sets setSelectedSet={setSelectedSet} selectedSet={selectedSet} setPage={setPage}/>
             {items.length === 0 ?
             <div className="lds-dual-ring"></div>:
             <div className="card-container row justify-content-between">

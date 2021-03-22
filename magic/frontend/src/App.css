@@ -102,6 +102,48 @@ html{
   top: 0 !important;
 }
 
+.set{
+  max-width: 20rem;
+  position: relative;
+  text-align: center;
+  justify-content: center;
+}
+
+.set-name{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Times New Roman', Times, serif;
+  color:white;
+  font-weight: 800;
+  font-size: 2em;
+  cursor: pointer;
+  text-shadow: 2px 2px 2px #000000;
+  display: none;
+  pointer-events:none;
+}
+
+.set-img:hover + .set-name{
+  display: block;
+}
+
+.set-img{
+  max-width: 20rem;
+  border-radius: 30px;
+}
+
+.set-img:hover{
+  background-color: rgb(0, 0, 0);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.selected-set{
+  border-color:#341dff;
+  box-shadow:0 0 20px #341dff;
+}
+
 .error {
   color: red;
   font-weight: 700;

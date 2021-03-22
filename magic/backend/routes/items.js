@@ -22,8 +22,7 @@ router
             currentPage: page
         }).then((rows) => {
             console.log(rows.pagination);
-            const newRows = rows.data.map(card => ({...card, imageurl: `https://bucket-of-magic.s3.eu-north-1.amazonaws.com/KHM/${card.nname.replace(/\s/g, '+')}.full.jpg`}));
-            res.json(newRows);
+            res.json(rows);
         })
         .catch((err) => {
             console.log(err);
