@@ -34,11 +34,17 @@ const getPaginatedCollection = (page, set, userId) => {
         set: set,
         user_id: userId
     };
+
     const request = axios.get(`${baseUrl}/paginated/${params.set}/${params.page}/${params.user_id}`, config);
+
     return request
     .then(response => {
         return response.data
     });
 }
 
-export default { addToCollection, setToken, getPaginatedCollection }
+export default { 
+    addToCollection, 
+    setToken, 
+    getPaginatedCollection, 
+}

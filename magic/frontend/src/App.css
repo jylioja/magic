@@ -97,7 +97,7 @@ html{
 
 .close-button{
   z-index: 104;
-  position: absolute;
+  position: fixed;
   right: 0 !important;
   top: 0 !important;
 }

@@ -41,7 +41,7 @@ const Home = () => {
             <Sets setSelectedSet={setSelectedSet} selectedSet={selectedSet} setPage={setPage}/>
             {items.length === 0 ?
             <div className="lds-dual-ring"></div>:
-            <div className="card-container row justify-content-between">
+            <div className="card-container row justify-content-center">
             {items.map(card => (<Card card={card}/>))}
             </div> }
             <div className="d-flex justify-content-between mt-3">

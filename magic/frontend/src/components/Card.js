@@ -6,11 +6,15 @@ import Button from 'react-bootstrap/Button';
 const Card = ({card}) => {
 
     const [showInfo, setShowInfo] = useState(false);
+
+    const handleImageError = (e) => {
+        e.target.src = "../public/Image-not-found.png";
+    }
     
     return(
     <div>
         <div className="col card-content" onClick={() => setShowInfo(!showInfo)}>
-            <img className="cardImg rounded" src={card.imageurl}></img>
+            <img className="cardImg rounded" src={card.imageurl} onError={(e) =>{e.target.onerror = null; e.target.src = "https://bucket-of-magic.s3.eu-north-1.amazonaws.com/other/Image-not-found.png"} }></img>
         </div>
         {showInfo &&
             <div>
