@@ -3,13 +3,9 @@ import CardInfo from './CardInfo';
 import Button from 'react-bootstrap/Button';
 
 
-const Card = ({card}) => {
+const Card = ({card, showCardsFrom}) => {
 
     const [showInfo, setShowInfo] = useState(false);
-
-    const handleImageError = (e) => {
-        e.target.src = "../public/Image-not-found.png";
-    }
     
     return(
     <div>
@@ -18,7 +14,7 @@ const Card = ({card}) => {
         </div>
         {showInfo &&
             <div>
-                <CardInfo card={card}/>
+                <CardInfo card={card} showCardsFrom={showCardsFrom}/>
                 <Button variant="danger" className="close-button my-5 mx-5"onClick={() => setShowInfo(!showInfo)}>Close</Button>
             </div>
         }

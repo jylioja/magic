@@ -21,7 +21,6 @@ router
             perPage: 20,
             currentPage: page
         }).then((rows) => {
-            console.log(rows.pagination);
             res.json(rows);
         })
         .catch((err) => {

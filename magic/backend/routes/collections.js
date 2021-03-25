@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 const config = require("../utils/config");
-const { route } = require('./users');
 
 const options = config.DATABASE_OPTIONS;
 const knex = require('knex')(options);
@@ -63,7 +62,6 @@ router
         currentPage: page
     })
     .then((rows) => {
-        console.log(rows)
         res.json(rows);
     })
     .catch((err) => {

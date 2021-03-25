@@ -12,7 +12,6 @@ router
     knex('nsets')
     .select('*')
     .then((rows) => {
-        console.log(rows);
         res.json(rows);
     })
     .catch((err) => {

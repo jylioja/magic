@@ -9,6 +9,7 @@ const Collection = () => {
     const [items, setItems] = useState([]);
     const [selectedSet, setSelectedSet] = useState('KHM');
     const [itemsCount, setItemsCount] = useState(0);
+    const [showCardsFrom, setShowCardsFrom] = useState('collection');
 
     const [page, setPage] = useState(1);
 
@@ -39,7 +40,6 @@ const Collection = () => {
         }
     }
 
-
     useEffect(() => {
         if(loggedIn){
             getItems();
@@ -53,21 +53,14 @@ const Collection = () => {
             {items.length === 0 ?
             <div className="lds-dual-ring"></div>:
             <div className="card-container row justify-content-center">
-            {items.map(card => (<Card card={card}/>))}
+            {items.map(card => (<Card card={card} showCardsFrom={showCardsFrom}/>))}
             </div> }
-            {items.length < 1 ? 
-                <div>
-                    You have no cards in your collection.
-                </div> : null}
             <div className="d-flex justify-content-between mt-3">
-                    <Button onClick={() => previousPage()}>Previous</Button>
-                    <span className="">{page}</span>
-                    {itemsCount < page * 20 ? 
-                    <Button onClick={() => nextPage()}>Next</Button> : 
-                    null
-                    }
+                <Button onClick={() => previousPage()}>Previous</Button>
+                <span className="">{page}</span>
+                <Button onClick={() => nextPage()}>Next</Button>
             </div>
-            </div>
+        </div>
     );
 }
 

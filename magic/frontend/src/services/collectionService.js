@@ -17,7 +17,7 @@ const addToCollection = async (cardId, userId) => {
     const body = {
         user_id: userId,
         item_id: cardId
-    }
+    };
 
     const res = await axios.post(baseUrl, body, config);
     return res;

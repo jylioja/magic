@@ -8,8 +8,7 @@ import Sets from './Sets';
 const Home = () => {
 
     const [items, setItems] = useState([]);
-    const [selectedSet, setSelectedSet] = useState('KHM')
-
+    const [selectedSet, setSelectedSet] = useState('KHM');
     const [page, setPage] = useState(1);
 
     const getItems = () => {
